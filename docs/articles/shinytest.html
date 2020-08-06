@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinytest</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0.9000</span>
       </span>
     </div>
 
@@ -95,13 +95,13 @@
 
       
 
-      </header><script src="shinytest_files/header-attrs-2.1.2/header-attrs.js"></script><div class="row">
+      </header><script src="shinytest_files/header-attrs-2.3/header-attrs.js"></script><script src="shinytest_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with shinytest</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/shinytest/blob/master/vignettes/shinytest.Rmd"><code>vignettes/shinytest.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/shinytest/blob/master/docs/vignettes/shinytest.Rmd"><code>docs/vignettes/shinytest.Rmd</code></a></small>
       <div class="hidden name"><code>shinytest.Rmd</code></div>
 
     </div>
@@ -130,8 +130,10 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p><strong>Shinytest</strong> is in active development. To install it, run:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
-<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"rstudio/shinytest"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://devtools.r-lib.org">devtools</a></span>)
+<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"rstudio/shinytest"</span>)
+</pre></div>
 <div id="recording-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#recording-tests" class="anchor"></a>Recording tests</h3>
@@ -148,10 +150,12 @@
 </li>
 </ul>
 <p>To record tests, run the following:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">shinytest</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/rstudio/shinytest">shinytest</a></span>)
 
 <span class="co"># Launch the target app (replace with the correct path)</span>
-<span class="fu"><a href="../reference/recordTest.html">recordTest</a></span>(<span class="st">"path/to/app"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/recordTest.html">recordTest</a></span>(<span class="st">"path/to/app"</span>)
+</pre></div>
 <p>In a separate R process, this launches the Shiny application to be tested. We’ll refer to this as the <strong>target app</strong>. This also launches a special Shiny application in the current R process which displays the target app in an iframe and has some controls outside the iframe. We’ll refer to this as the <strong>recorder app</strong>. You will see something like this:</p>
 <p><img src="screenshot-recorder-1.png"></p>
 <p>On the left is the target app (in this case, the “Shiny Widgets Gallery”), and on the right is the recorder app (titled “Test event recorder”). Note that you may need to make the browser window wider because the recorder panel occupies some space.</p>
@@ -162,14 +166,16 @@
 <p><img src="screenshot-recorder-2.png"></p>
 <p>It is also possible to take a <em>target</em> snapshot. This is a snapshot of one or more specified output (instead of the default, which is to snapshot the entire application). To do this, hold down the Control (or Command) button on your keyboard and click on an output; it will snapshot just that one output.</p>
 <p>When you are done recording a sequence of events, click on the “Save script and exit test event recorder” button. If you are in the RStudio IDE, it will open the test script in the <code>tests/</code> subdirectory of the application. In this case, the name of the script is <code>mytest.R</code>:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">app</span> <span class="kw">&lt;-</span> <span class="no">ShinyDriver</span>$<span class="fu">new</span>(<span class="st">".."</span>)
-<span class="no">app</span>$<span class="fu">snapshotInit</span>(<span class="st">"mytest"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">app</span> <span class="op">&lt;-</span> <span class="kw">ShinyDriver</span><span class="op">$</span><span class="fu">new</span>(<span class="st">".."</span>)
+<span class="kw">app</span><span class="op">$</span><span class="fu">snapshotInit</span>(<span class="st">"mytest"</span>)
 
-<span class="no">app</span>$<span class="fu">snapshot</span>()
-<span class="no">app</span>$<span class="fu">setInputs</span>(<span class="kw">checkGroup</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>))
-<span class="no">app</span>$<span class="fu">setInputs</span>(<span class="kw">checkGroup</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))
-<span class="no">app</span>$<span class="fu">setInputs</span>(<span class="kw">action</span> <span class="kw">=</span> <span class="st">"click"</span>)
-<span class="no">app</span>$<span class="fu">snapshot</span>()</pre></body></html></div>
+<span class="kw">app</span><span class="op">$</span><span class="fu">snapshot</span>()
+<span class="kw">app</span><span class="op">$</span><span class="fu">setInputs</span>(checkGroup = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>))
+<span class="kw">app</span><span class="op">$</span><span class="fu">setInputs</span>(checkGroup = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))
+<span class="kw">app</span><span class="op">$</span><span class="fu">setInputs</span>(action = <span class="st">"click"</span>)
+<span class="kw">app</span><span class="op">$</span><span class="fu">snapshot</span>()
+</pre></div>
 </div>
 <div id="running-tests" class="section level3">
 <h3 class="hasAnchor">
@@ -190,7 +196,9 @@ Updating baseline snapshot at tests/mytest-expected
 Renaming tests/mytest-current
       =&gt; tests/mytest-expected.</code></pre>
 <p>Behind the scenes, it runs <code><a href="../reference/testApp.html">testApp()</a></code>. You can manually run the tests with this:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/testApp.html">testApp</a></span>(<span class="st">"myshinyapp"</span>, <span class="st">"mytest"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="../reference/testApp.html">testApp</a></span>(<span class="st">"myshinyapp"</span>, <span class="st">"mytest"</span>)
+</pre></div>
 <p>This will play back the interactions and record snapshots, as specified in the test script. The very first time the tests are run, they will be saved in a subdirectory of the app called <code>tests/mytest-expected</code>. These are the expected results, and future test runs will be compared against them.</p>
 <p>The directory will contain two files for each snapshot. For example:</p>
 <pre><code>001.json
@@ -252,7 +260,9 @@ Would you like to view the differences between expected and current results [y/n
 <p>After inspecting the changes, you can choose to update the expected results (that is, replace the old expected results with the new current results), or to just quit without updating.</p>
 <p>You should update the results if the changes are expected. You should quit without updating if the changes are unexpected.</p>
 <p>If you want to compare the results again in the future, without running <code><a href="../reference/testApp.html">testApp()</a></code>, you can run the following:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/snapshotCompare.html">snapshotCompare</a></span>(<span class="st">"path/to/app/"</span>, <span class="st">"mytest"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="../reference/snapshotCompare.html">snapshotCompare</a></span>(<span class="st">"path/to/app/"</span>, <span class="st">"mytest"</span>)
+</pre></div>
 </div>
 <div id="multiple-test-scripts" class="section level3">
 <h3 class="hasAnchor">
@@ -282,7 +292,9 @@ Would you like to view the differences between expected and current results [y/n
 <a href="#prerendered-shiny-documents" class="anchor"></a>Prerendered Shiny documents</h3>
 <p>Some Shiny documents use <a href="http://rmarkdown.rstudio.com/authoring_shiny_prerendered.html"><code>runtime: shiny_prerendered</code></a>, which helps speed up page loading time. Normally, the first time these applications are run, they will leave behind a generated .html file as well as a cache directory named myfile_data/.</p>
 <p>You can remove these files by adding this to the end of your test script (assuming the name of your document is doc.Rmd):</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="kw pkg">rmarkdown</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/shiny_prerendered_clean.html">shiny_prerendered_clean</a></span>(<span class="st">"../doc.Rmd"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">rmarkdown</span>::<span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/shiny_prerendered_clean.html">shiny_prerendered_clean</a></span>(<span class="st">"../doc.Rmd"</span>)
+</pre></div>
 <p>Alternatively, you can save the generated files, but then the tests will be run with the generated files, so the prerendering step will not be run for future tests.</p>
 <p>For an example of a prerendered .Rmd and tests, see <a href="https://github.com/rstudio/shinytest/tree/master/tests/testthat/recorded_tests/rmd-prerendered">here</a>.</p>
 </div>
@@ -309,7 +321,7 @@ Would you like to view the differences between expected and current results [y/n
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

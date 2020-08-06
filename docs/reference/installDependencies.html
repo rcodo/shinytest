@@ -75,7 +75,7 @@ install a headless web browser, PhantomJS." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinytest</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0.9000</span>
       </span>
     </div>
 
@@ -161,14 +161,15 @@ missing. For more information about where PhantomJS will be installed, see
 <code><a href='https://rdrr.io/pkg/webdriver/man/install_phantomjs.html'>install_phantomjs</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='kw'>if</span> (!<span class='fu'><a href='dependenciesInstalled.html'>dependenciesInstalled</a></span>() <span class='kw'>&amp;&amp;</span>
+<span class='co'>if</span> (<span class='op'>!</span><span class='fu'><a href='dependenciesInstalled.html'>dependenciesInstalled</a></span>() <span class='op'>&amp;&amp;</span>
     <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/menu.html'>menu</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Yes"</span>, <span class='st'>"No"</span>), <span class='st'>"Install missing dependencies?"</span>), <span class='fl'>1L</span>)) {
   <span class='fu'>installDependencies</span>()
 }
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -184,7 +185,7 @@ missing. For more information about where PhantomJS will be installed, see
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
